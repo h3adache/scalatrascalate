@@ -1,0 +1,17 @@
+This is a simple example of using scalatra with scalate.
+It uses sbt to build but you can also run:
+
+sbt make-pom && mvn package if you want to use maven.
+
+This is meant to accompany the tutorial at http://www.chengin.com/tutorials/ScalatraScalate.html
+
+To build and run this example:
+
+git clone git://github.com/h3adache/scalatrascalate.git
+cd scalatrascalate
+sbt
+# while inside sbt
+> update
+> jetty-run
+
+browse to http://localhost:8080 to see the results.

@@ -23,7 +23,7 @@ class HelloWorld(info: ProjectInfo) extends DefaultWebProject(info)
     val scalate = "org.fusesource.scalate" % "scalate-core" % scalateVersion
     val scalatraScalate = "org.scalatra" %% "scalatra-scalate" % scalatraVersion
 
-    val sfl4japi = "org.slf4j" % "slf4j-api" % slf4jVersion % "runtime"
+    val sfl4japi = "org.slf4j" % "slf4j-api" % slf4jVersion
     val sfl4jnop = "org.slf4j" % "slf4j-nop" % slf4jVersion % "runtime"
 
     // repositories
