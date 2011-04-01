@@ -6,7 +6,7 @@ class HelloWorld(info: ProjectInfo) extends DefaultWebProject(info)
     val servletVersion = "2.5"
     val slf4jVersion = "1.6.0"
     val logbackVersion = "0.9.24"
-    val scalatraVersion = "2.0.0-SNAPSHOT"
+    val scalatraVersion = "2.0.0.M1"
     val scalateVersion = "1.2"
     val scalaTestVersion = "1.2-for-scala-2.8.0.final-SNAPSHOT"
 
