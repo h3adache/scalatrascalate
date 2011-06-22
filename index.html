@@ -1,85 +1,323 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset='utf-8'>
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>Scalatra and Scalate using sbt in one Pomodoro</title><meta name="generator" content="DocBook XSL Stylesheets V1.75.2" />
+<script type="text/javascript">
 
-  <title>h3adache/scalatrascalate @ GitHub</title>
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-17734607-1']);
+  _gaq.push(['_setDomainName', '.chengin.com']);
+  _gaq.push(['_trackPageview']);
 
-  <style type="text/css">
-    body {
-      margin-top: 1.0em;
-      background-color: #eb6b1e;
-      font-family: Helvetica, Arial, FreeSans, san-serif;
-      color: #ffffff;
-    }
-    #container {
-      margin: 0 auto;
-      width: 700px;
-    }
-    h1 { font-size: 3.8em; color: #1494e1; margin-bottom: 3px; }
-    h1 .small { font-size: 0.4em; }
-    h1 a { text-decoration: none }
-    h2 { font-size: 1.5em; color: #1494e1; }
-    h3 { text-align: center; color: #1494e1; }
-    a { color: #1494e1; }
-    .description { font-size: 1.2em; margin-bottom: 30px; margin-top: 30px; font-style: italic;}
-    .download { float: right; }
-    pre { background: #000; color: #fff; padding: 15px;}
-    hr { border: 0; width: 80%; border-bottom: 1px solid #aaa}
-    .footer { text-align:center; padding-top:30px; font-style: italic; }
-  </style>
-</head>
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
 
-<body>
-  <a href="http://github.com/h3adache/scalatrascalate"><img style="position: absolute; top: 0; right: 0; border: 0;" src="http://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub" /></a>
+</script>
+</head><body><div class="article" title="Scalatra and Scalate using sbt in one Pomodoro"><div class="titlepage"><div><div><h2 class="title"><a id="id1155962"></a>Scalatra and Scalate using sbt in one Pomodoro</h2></div><div><div class="author"><h3 class="author"><span class="firstname">Gin-Ting</span> <span class="surname">Chen</span></h3><code class="email">&lt;<a class="email" href="mailto:chengt@chengin.com">chengt@chengin.com</a>&gt;</code></div></div><div><p class="pubdate">2010-07-30</p></div></div><hr /></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="section"><a href="#id1156081">Concepts and Prereqs</a></span></dt><dt><span class="section"><a href="#id1156015">Project creation</a></span></dt><dt><span class="section"><a href="#id1155963">Adding the dependencies and making a web project</a></span></dt><dt><span class="section"><a href="#id1156213">Creating a simple Scalatra servlet</a></span></dt><dt><span class="section"><a href="#id1156264">Adding Scalate</a></span></dt><dt><span class="section"><a href="#id1156318">Adding a layout</a></span></dt></dl></div>
+  
 
-  <div id="container">
+  <div class="section" title="Concepts and Prereqs"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="id1156081"></a>Concepts and Prereqs</h2></div></div></div>
+    
 
-    <div class="download">
-      <a href="http://github.com/h3adache/scalatrascalate/zipball/master">
-        <img border="0" width="90" src="http://github.com/images/modules/download/zip.png"></a>
-      <a href="http://github.com/h3adache/scalatrascalate/tarball/master">
-        <img border="0" width="90" src="http://github.com/images/modules/download/tar.png"></a>
-    </div>
+    <p><a class="ulink" href="http://www.scalatra.org/" target="_top">Scalatra</a> is a
+    tiny, Sinatra-like web framework for <a class="ulink" href="http://www.scala-lang.org/" target="_top">Scala</a></p>
 
-    <h1><a href="http://github.com/h3adache/scalatrascalate">scalatrascalate</a>
-      <span class="small">by <a href="http://github.com/h3adache">h3adache</a></span></h1>
+    <p><a class="ulink" href="http://scalate.fusesource.org/" target="_top">Scalate</a> is
+    Scala based template engine that we're going to separate the view</p>
 
-    <div class="description">
-      Sample of using Scalatra with Scalate for view separation and sbt as a build tool
-    </div>
+    <p>A pomodoro is a time management technique only mentioned for fun and
+    as a time reference, not something that you need to use.</p>
 
-    <h2>Authors</h2>
-<p>Tim Chen (chengt@gmail.com)<br/><br/>      </p>
-<h2>Contact</h2>
-<p>Tim Chen (chengt@gmail.com)<br/>      </p>
-
-
-    <h2>Download</h2>
-    <p>
-      You can download this project in either
-      <a href="http://github.com/h3adache/scalatrascalate/zipball/master">zip</a> or
-      <a href="http://github.com/h3adache/scalatrascalate/tarball/master">tar</a> formats.
-    </p>
-    <p>You can also clone the project with <a href="http://git-scm.com">Git</a>
-      by running:
-      <pre>$ git clone git://github.com/h3adache/scalatrascalate</pre>
-    </p>
-
-    <div class="footer">
-      get the source code on GitHub : <a href="http://github.com/h3adache/scalatrascalate">h3adache/scalatrascalate</a>
-    </div>
-
+    <p>I also assume that you have read about and setup <a class="ulink" href="http://code.google.com/p/simple-build-tool/wiki/Setup" target="_top">sbt</a></p>
   </div>
 
-  <script type="text/javascript">
-var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
-document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
-</script>
-<script type="text/javascript">
-try {
-var pageTracker = _gat._getTracker("UA-24091924-1");
-pageTracker._trackPageview();
-} catch(err) {}</script>
-</body>
-</html>
+  <div class="section" title="Project creation"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="id1156015"></a>Project creation</h2></div></div></div>
+    
+
+    <p>We're going to follow the sbt Quick Setup instructions which is as
+    easy as creating a project folder (we're going to use HelloWorld for the
+    folder), running the sbt command and following the prompts. When it asks
+    you what version of scala to use enter 2.8.0. The input and output would
+    look something like below</p><pre class="programlisting">- ~/Projects/HelloWorld: sbt
+Project does not exist, create new project? (y/N/s) y
+Name: Hello World
+Organization: chengin
+Version [1.0]: 
+Scala version [2.7.7]: 2.8.0
+sbt version [0.7.4]: 
+Getting Scala 2.7.7 ...
+# I removed some content here
+[info] Building project Hello World 1.0 against Scala 2.8.0
+[info]    using sbt.DefaultProject with sbt 0.7.4 and Scala 2.7.7
+&gt;</pre><p>Notice that it drops you to a prompt. That's the sbt
+    shell prompt so exit out of that (by typing exit or just ctrl-c out). You
+    will also notice that even though you selected to use scala 2.8.0 it still
+    downloads and used 2.7.7. That's what sbt uses internally and should not
+    effect anything.</p>
+
+    <p>If you want to ensure that everything is ok you can run "update"
+    while in that sbt prompt and you should see a [success] message.</p>
+  </div>
+
+  <div class="section" title="Adding the dependencies and making a web project"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="id1155963"></a>Adding the dependencies and making a web project</h2></div></div></div>
+    
+
+    <p>I'm going to assume that you followed the prereqs and read the quick
+    intro to sbt so I won't go into it's mechanisms too much. If you get lost
+    at any point just read the sbt quick setup.</p>
+
+    <p>What I need to do now is to tell sbt that HelloWorld is a web
+    project (which allows me to run jetty through the sbt command shell) and
+    also to add my dependencies for scalatra and scalate.</p>
+
+    <p>So first I'm going to create the project descriptor by first
+    creating a build folder under ${PROJECT_HOME}/project and adding a file
+    which I'll, for obvious reasons, call HelloWorld.scala. </p><pre class="programlisting">- ~/Projects/HelloWorld: mkdir project/build
+- ~/Projects/HelloWorld: vim project/build/HelloWorld.scala</pre><p>The
+    contents of that file will be</p>
+
+    <pre class="programlisting">import sbt._
+
+class HelloWorld(info: ProjectInfo) extends DefaultWebProject(info)
+{
+    val jettyVersion = "6.1.22"
+    val servletVersion = "2.5"
+    val slf4jVersion = "1.6.0"
+    val scalatraVersion = "2.0.0-SNAPSHOT"
+    val scalateVersion = "1.2"
+    val scalaTestVersion = "1.2-for-scala-2.8.0.final-SNAPSHOT"
+
+    val jetty6 = "org.mortbay.jetty" % "jetty" % jettyVersion % "test"
+    val servletApi = "javax.servlet" % "servlet-api" % servletVersion % "provided"
+
+    // scalaTest
+    val scalaTest = "org.scalatest" % "scalatest" % scalaTestVersion % "test"
+
+    // scalatra
+    val scalatra = "org.scalatra" %% "scalatra" % scalatraVersion
+
+    // scalate
+    val scalate = "org.fusesource.scalate" % "scalate-core" % scalateVersion
+    val scalatraScalate = "org.scalatra" %% "scalatra-scalate" % scalatraVersion
+
+    val sfl4japi = "org.slf4j" % "slf4j-api" % slf4jVersion % "runtime"
+    val sfl4jnop = "org.slf4j" % "slf4j-nop" % slf4jVersion % "runtime"
+
+    // repositories
+    val scalaToolsSnapshots = "Scala Tools Repository" at "http://nexus.scala-tools.org/content/repositories/snapshots/"
+    val sonatypeNexusSnapshots = "Sonatype Nexus Snapshots" at "https://oss.sonatype.org/content/repositories/snapshots"
+    val sonatypeNexusReleases = "Sonatype Nexus Releases" at "https://oss.sonatype.org/content/repositories/releases"
+    val fuseSourceSnapshots = "FuseSource Snapshot Repository" at "http://repo.fusesource.com/nexus/content/repositories/snapshots"
+}</pre>
+
+    <p>Again, verify that everything is correct by running "sbt update". At
+    this point we can also test start jetty (even though nothing is going to
+    be visible by running jetty-run. If you do this you should see a [success]
+    msg and be able to see a default landing page when you navigate to
+    http://localhost:8080. Stop jetty by typing jetty-stop</p>
+
+    <p>Even though I commented the build file relatively well, I'll explain
+    some piece of it as some of this has interesting facts.</p>
+
+    <p>The first section of my build file just contains the versions so
+    that I can quickly upgrade/downgrade should newer versions of my
+    dependencies come out.</p>
+
+    <p>The 2nd section is solely so that I can run jetty using sbt.</p>
+
+    <p>The 3rd section I'm not using right now because this example is a
+    horrible example of good TDD practices :P But it's there should you decide
+    (and you should) to add tests.</p>
+
+    <p>The scalatra section is interesting. This did not work prior to
+    scalate releasing version 1.2. I used to have to git clone scalatra and
+    build it manually and drop my jars for scalatra and scalatra-scalate into
+    a lib folder in my ${PROJECT_HOME} directory. But since version 1.2 of
+    scalate was released, I have not had to do that. But of course, since you
+    can see that I still rely on SNAPSHOT code, all that could change at
+    anytime. :P</p>
+
+    <p>Scalate requires sfl4j so that is why I added the sfl4j dependencies
+    into the scalate section but I included them only as runtime
+    dependencies.</p>
+  </div>
+
+  <div class="section" title="Creating a simple Scalatra servlet"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="id1156213"></a>Creating a simple Scalatra servlet</h2></div></div></div>
+    
+
+    <p>Create a new file called
+    ${PROJECT_HOME}/src/main/scala/main/com/chengin/web/HelloWorld.scala. I'm
+    using the package com.chengin.web just for show but, if you change it,
+    remember to replace that for whatever you name it to when it's referenced
+    later. The contents of that file will look like</p>
+
+    <pre class="programlisting">package com.chengin.web
+
+import org.scalatra._
+
+class HelloWorld extends ScalatraServlet {
+
+    before {
+        contentType = "text/html"
+    }
+
+    get("/") {
+        "Hello World"
+    }
+
+    protected def contextPath = request.getContextPath
+}</pre>
+
+    <p>If you tried to skip ahead and ran sbt update and sbt jetty-run you
+    will notice that you are still at the default landing page. That's because
+    we have to first tell our web container (jetty in this case) about our
+    servlet and also what URLs it can handle. The way that we do this is by
+    creating a web.xml in src/main/webapp/WEB-INF and adding a brief
+    descriptor for our new servlet. It will look something like</p>
+
+    <pre class="programlisting">&lt;!-- this will be under src/main/webapp/WEB-INF/web.xml --&gt;
+&lt;web-app xmlns="http://java.sun.com/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+         version="2.5"&gt;
+    &lt;servlet&gt;
+        &lt;servlet-name&gt;HelloWorld&lt;/servlet-name&gt;
+        &lt;servlet-class&gt;com.chengin.web.HelloWorld&lt;/servlet-class&gt;
+    &lt;/servlet&gt;
+
+    &lt;servlet-mapping&gt;
+        &lt;servlet-name&gt;HelloWorld&lt;/servlet-name&gt;
+        &lt;url-pattern&gt;/*&lt;/url-pattern&gt;
+    &lt;/servlet-mapping&gt;
+
+    &lt;servlet-mapping&gt;
+        &lt;servlet-name&gt;default&lt;/servlet-name&gt;
+        &lt;url-pattern&gt;/images/*&lt;/url-pattern&gt;
+        &lt;url-pattern&gt;/css/*&lt;/url-pattern&gt;
+        &lt;url-pattern&gt;/js/*&lt;/url-pattern&gt;
+    &lt;/servlet-mapping&gt;
+&lt;/web-app&gt;</pre>
+
+    <p>As you can see, we first create a servlet section to help locate our
+    servlet. The servlet-class will map to the fully qualified classname of
+    our new servlet and the servlet-name is just an arbitrary name that we
+    give it. Next we create the servlet-mapping section that tells our web
+    container what url patterns our servlet (make sure the name here matches
+    the one that you just gave in your servlet section) will be able to
+    handle. The next servlet section will work for sure in tomcat and jetty
+    but may not work in other servlet containers and basically maps the url
+    patterns that you see to the 'default' servlet. The reason this is
+    necessary is that with the all encompassing /* pattern that we gave above,
+    all requests to resources that we bundle with our webapp will incorrectly
+    be handled by our servlet. Other ways that you can get around this issue
+    is to use a Filter instead and programmatically map those resources out or
+    by making a special pattern (for example /servlet or /*.do as common in
+    other webframeworks) for our servlet. There are other ways around this as
+    well but I'm running on a pomodoro here (actually my second :)).</p>
+
+    <p>Now if we run sbt update jetty-run we should see our Hello World msg
+    when browsing to http://localhost:8080. Success! But we're not done
+    yet.</p>
+  </div>
+
+  <div class="section" title="Adding Scalate"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="id1156264"></a>Adding Scalate</h2></div></div></div>
+    
+
+    <p>Earlier we already added all our scalate dependencies so we don't
+    have to worry about touching the build descriptor (remember that file? It
+    was the one under ${PROJECT_HOME}/project/build) again. Also, I should
+    mention that you didn't actually have to run update under sbt since we
+    didn't update any of the dependencies after our initial run of update. But
+    you knew that already since you read the sbt intro doc right? ;)</p>
+
+    <p>We're going to create an index.scaml file under
+    ${PROJECT-HOME}/src/main/webapp/WEB-INF. Those of you that know anything
+    about Java Servlets would probably be scratching their heads as this is
+    not a publically accessible location. But the fact is that we don't need
+    to make it publically accessible since we are not going to serve it
+    directly and will instead have the scalate template engine render it for
+    us (more on this in a bit). So go ahead and create the file and make a
+    very simple</p>
+
+    <pre class="programlisting">-@ val content:String
+!!! 5
+%html
+  %head
+    %title Hello World
+  %body
+    %h1= content</pre>
+
+    <p>I'm using scaml syntax but won't get into that. It should be pretty
+    self explanatory what will happen but you can also read up on the scaml
+    syntax on scalate site if you need.</p>
+
+    <p>Next, I'm going to tell my servlet to use that as my index page
+    instead of the hardcoded Hello World. I added some comments to explain
+    what was going on.</p>
+
+    <pre class="programlisting">package com.chengin.web
+
+import org.scalatra._
+import scalate.ScalateSupport // ScalaSupport is a trait that adds scala support
+
+class HelloWorld extends ScalatraServlet with ScalateSupport { // adds the scala trait to your servlet
+    before {
+        contentType = "text/html"
+    }
+
+    get("/") {
+        // templateEngine is defined for you by ScalateSupport and can be used to help render your index.scaml content.
+        templateEngine.layout("/WEB-INF/index.scaml", Map("content" -&gt; "Hello World"))
+    }
+
+    protected def contextPath = request.getContextPath
+}</pre>
+
+    <p>I'm using the layout method of templateEngine rather than the
+    renderContent documented on scalatra site because that does not allow for
+    layouts (which is kind of like Tiles or SiteMesh). The map adds an
+    attribute key called content with the value of Hello World that will be
+    rendered in our scaml.</p>
+
+    <p>Run jetty-run in sbt again and browse to http://localhost:8080
+    again. It will take a while (compilation of all things scala is painfully
+    slow :P) but you will see your Hello World msg in a h1 header tag. Now one
+    last thing (again because it is currently documented incorrectly).</p>
+  </div>
+
+  <div class="section" title="Adding a layout"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="id1156318"></a>Adding a layout</h2></div></div></div>
+    
+
+    <p>Let's strip out our index.scaml to simply say</p>
+
+    <pre class="programlisting">- attributes("title") = "Hello from layout"
+-@ val content: String
+%h1= content</pre>
+
+    <p>Next let's create a new file called default.scaml and place it under
+    ${PROJECT_HOME}/src/webapp/WEB-INF/scalate/layouts with the
+    contents</p>
+
+    <pre class="programlisting">-@ var title: String = "Default Title"
+-@ val body: String
+!!! 5
+%html
+  %head
+    %title= title
+  %body
+    %p
+      != body</pre>
+
+    <p>Now run jetty again and browse to http://localhost:8080. Notice what
+    happened? You now get the default layout as a wrapper for your content and
+    by adding an attribute for title in your index.scaml, you have replaced
+    the default title of 'Default Title' with your own more descriptive page
+    comment.</p>
+
+    <p>That's it! We've now create a simple web app using a very light
+    weight framework of scalatra, scalate and sbt. And, hopefully, all it took
+    you was 1 pomodoro. :)</p>
+  </div>
+</div></body></html>
