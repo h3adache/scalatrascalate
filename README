@@ -3,7 +3,7 @@ It uses sbt to build but you can also run:
 
 sbt make-pom && mvn package if you want to use maven.
 
-This is meant to accompany the tutorial at http://code.chengin.com/ScalatraScalate.html
+This is meant to accompany the tutorial at http://h3adache.github.com/scalatrascalate/
 
 To build and run this example:
 
